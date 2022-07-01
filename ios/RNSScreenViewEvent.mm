@@ -21,6 +21,7 @@
   if ((self = [super init])) {
     _eventName = [eventName copy];
     _viewTag = reactTag;
+
     _progress = progress;
     _closing = closing;
     _goingForward = goingForward;
