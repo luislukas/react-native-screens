@@ -1,5 +1,7 @@
 apply plugin: "com.android.application"
+apply plugin: 'kotlin-android'
 
+apply plugin: 'kotlin-android-extensions'
 import com.android.build.OutputFile
 
 /**
@@ -164,7 +166,8 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            
+            minifyEnabled false
+            debuggable true
             signingConfig signingConfigs.release
             
             // Detox-specific additions to pro-guard
@@ -187,13 +190,23 @@ android {
     }
 }
 
+def nav_version = "2.5.0"
+def kotlinVersion = "1.6.21"
 dependencies {
+
+
     implementation project(':react-native-screens')
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
 
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    implementation "androidx.navigation:navigation-fragment:$nav_version"
+    implementation "androidx.navigation:navigation-ui:$nav_version"
+
+    implementation "androidx.constraintlayout:constraintlayout:2.1.4"
+
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
     }

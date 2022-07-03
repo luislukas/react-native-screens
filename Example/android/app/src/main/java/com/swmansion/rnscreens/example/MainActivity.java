@@ -1,35 +1,34 @@
 package com.swmansion.rnscreens.example;
 
+import android.content.Intent;
 import android.os.Bundle;
 
-import com.facebook.react.ReactActivity;
-import com.facebook.react.ReactActivityDelegate;
-import com.facebook.react.ReactRootView;
-import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.fragment.NavHostFragment;
 
-public class MainActivity extends ReactActivity {
-
-  /**
-   * Returns the name of the main component registered from JavaScript.
-   * This is used to schedule rendering of the component.
-   */
+import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
+public class MainActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler {
   @Override
-  protected String getMainComponentName() {
-    return "ScreensExample";
+  protected void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.main_activity);
+    NavHostFragment navhost = (NavHostFragment)
+            getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
   }
 
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(null);
+  public void invokeDefaultOnBackPressed() {
+    // NOOP
   }
 
   @Override
-  protected ReactActivityDelegate createReactActivityDelegate() {
-    return new ReactActivityDelegate(this, getMainComponentName()) {
-      @Override
-      protected ReactRootView createRootView() {
-        return new RNGestureHandlerEnabledRootView(MainActivity.this);
-      }
-    };
+  protected void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+    if (intent.getAction().equals(Intent.ACTION_VIEW)) {
+      NavHostFragment navhost = (NavHostFragment)
+              getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+      navhost.getNavController().navigate(R.id.deeplinkFragment);
+    }
   }
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    app:startDestination="@id/splashFragment">
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.swmansion.rnscreens.example.fragment.SplashFragment"
+        android:label="Splash Fragment">
+        <action
+            android:id="@+id/action_splashFragment_to_reactFragment"
+            app:destination="@id/reactFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reactFragment"
+        android:name="com.swmansion.rnscreens.example.fragment.ReactFragment"
+        android:label="React Fragment"/>
+    <fragment
+        android:id="@+id/deeplinkFragment"
+        android:name="com.swmansion.rnscreens.example.fragment.DeepLinkFragment"
+        android:label="Deeplink Fragment"/>
+</navigation>
